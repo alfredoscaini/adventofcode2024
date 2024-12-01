@@ -4,7 +4,7 @@ services:
   app: 
     build:
       dockerfile: ./dockerfile.local       
-    container_name: advent   
+    container_name: aoc2024
     restart: always
     volumes: 
       - ./src:/var/www/html
