@@ -1,6 +1,13 @@
 <?php 
 
-require_once('data.php');
+$data   = [];
+$handle = fopen("./input.txt", "r");
+if ($handle) {
+  while (($line = fgets($handle)) !== false) {
+    $data[] = explode('   ', $line);  
+  }  
+  fclose($handle);
+}
 
 $list_left  = [];
 $list_right = [];

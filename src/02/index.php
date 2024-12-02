@@ -75,7 +75,15 @@ class Report {
 
 // ----------------------------------------------------------------
 // MAIN
-require_once('data.php');
+$data   = [];
+$handle = fopen("input.txt", "r");
+if ($handle) {
+  while (($line = fgets($handle)) !== false) {
+    $data[] = explode(' ', $line);  
+  }  
+  fclose($handle);
+}
+
 
 $safe_reports = [];
 $bad_reports  = [];
