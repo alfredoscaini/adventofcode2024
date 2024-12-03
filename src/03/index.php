@@ -16,7 +16,7 @@ if ($handle) {
 // Question 1
 // --------------------------------------------------------------------
 $found = [];
-$pattern = "/mul\(\d+,\d+\)/";
+$pattern = "/mul\((\d+),(\d+)\)/";
 foreach ($data as $line) {
   preg_match_all($pattern, $line, $matches, PREG_PATTERN_ORDER);
   $found = array_merge($found, $matches[0]);
