@@ -11,9 +11,22 @@ class Manual {
   public function __construct($ordering = [], $page_numbers = []) {
     $this->ordering     = $ordering;
     $this->page_numbers = $page_numbers;
+    $this->setUpdates();
   }
 
-  public function setUpdates() {
+  public function getMiddleNumberCount($set = 'good') : int {
+    $sum = 0;
+
+    foreach ($this->updates[$set] as $update) {      
+      if (count($update)) {
+        $sum += $update[ceil(count($update) / 2) - 1];
+      }
+    }
+
+    return $sum;
+  }
+
+  private function setUpdates() {
 
     for ($i = 0; $i < count($this->page_numbers); $i++) {
       $numbers = $this->page_numbers[$i];
@@ -38,19 +51,6 @@ class Manual {
       }
     }
   }
-
-  public function getMiddleNumberCount($set = 'good') : int {
-    $sum = 0;
-
-    foreach ($this->updates[$set] as $update) {      
-      if (count($update)) {
-        $sum += $update[ceil(count($update) / 2) - 1];
-      }
-    }
-
-    return $sum;
-  }
-
     
   private function check($number, $next_number) : int {
     foreach ($this->ordering as $set) {
@@ -89,7 +89,6 @@ if ($handle) {
 }
 
 $manual = new Manual($ordering, $page_numbers);
-$manual->setUpdates();
 
 print '<p>Q1: The first answer is ' . $manual->getMiddleNumberCount() . '</p>';
 print '<p>Q1: The second answer is ' . $manual->getMiddleNumberCount('bad') . '</p>';
